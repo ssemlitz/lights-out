@@ -2,15 +2,24 @@ import { useState } from "react";
 import Cell from '../Cell/Cell'
 import style from './Board.module.css'
 
-const Board = (props) => {
+const Board = ({nrows = 5, ncols = 5, chanceLightStartsOn = 0.25}) => {
 
-  let chanceLightStartsOn = .5
-  let nrows = 5
-  let ncols = 5
+  // let chanceLightStartsOn = .5
+  // let nrows = 5
+  // let ncols = 5
   // const {chanceLightStartsOn, ncols, nrows} = props
 
-  const [board, setBoard] = useState(createBoard())
+  const [board, setBoard] = useState(
+    [[false, true, false, false, false],
+    [true, true, true, false, false],
+    [false, true, false, false, false],
+    [false, false, false, false, false],
+    [false, false, false, false, false]]
+    )
   const [hasWon, setHasWon] = useState(false)
+
+  console.log(board)
+
 
   function createBoard() {
     let board = [];
@@ -26,34 +35,34 @@ const Board = (props) => {
   }
   
   function flipCellsAroundMe(coord) {
-    
-    let [y, x] = coord.split('-').map(Number)
-    
-    // let y = coord.split('-').map(Number)[0]
-    // let x = coord.split('-').map(Number)[1]
-    
-    function flipCell(y, x) {
+    setBoard(oldBoard => {
+      const [y, x] = coord.split("-").map(Number);
+
+      const flipCell = (y, x, boardCopy) => {
+        // if this coord is actually on board, flip it
+
+        if (x >= 0 && x < ncols && y >= 0 && y < nrows) {
+          boardCopy[y][x] = !boardCopy[y][x];
+        }
+      };
+
+      const boardCopy = oldBoard.map(row => [...row]);
+
+      flipCell(y, x, boardCopy);
+      flipCell(y, x - 1, boardCopy);
+      flipCell(y, x + 1, boardCopy);
+      flipCell(y - 1, x, boardCopy);
+      flipCell(y + 1, x, boardCopy);
       
-      console.log('INSIDE OF FLIPCELL', [y, x])
-
-      if (x >= 0 && x < ncols && y >= 0 && y < nrows) {
-        console.log('******', board[y][x])
-        board[y][x] = !board[y][x]
-      }
-    }
-
-
-    flipCell(y, x); //Flip initial cell
-    flipCell(y, x - 1); //flip left
-    flipCell(y, x + 1); //flip right
-    flipCell(y - 1, x); //flip below
-    flipCell(y + 1, x); //flip above
-
-    let hasWon = board.every(row => row.every(cell => !cell))
-
-    setBoard(board)
-    setHasWon(hasWon)
+      let hasWon = board.every(row => row.every(cell => !cell))
+      
+      setHasWon(hasWon)
+      console.log(hasWon);
+      return boardCopy;
+    });
   }
+
+  
 
   function makeTable() {
     let tblBoard = [];
@@ -79,9 +88,8 @@ const Board = (props) => {
       </table>
     )
   }
-
+  
   return ( 
-    <>
       <div>
         {hasWon ? (
           <div className={style.winner}>
@@ -98,7 +106,6 @@ const Board = (props) => {
           </div>
         )}
       </div>
-    </>
   );
 }
 
