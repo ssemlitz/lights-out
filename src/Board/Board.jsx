@@ -9,13 +9,7 @@ const Board = ({nrows = 5, ncols = 5, chanceLightStartsOn = 0.25}) => {
   // let ncols = 5
   // const {chanceLightStartsOn, ncols, nrows} = props
 
-  const [board, setBoard] = useState(
-    [[false, true, false, false, false],
-    [true, true, true, false, false],
-    [false, true, false, false, false],
-    [false, false, false, false, false],
-    [false, false, false, false, false]]
-    )
+  const [board, setBoard] = useState(createBoard())
   const [hasWon, setHasWon] = useState(false)
 
   console.log(board)
@@ -88,13 +82,21 @@ const Board = ({nrows = 5, ncols = 5, chanceLightStartsOn = 0.25}) => {
       </table>
     )
   }
+
+  const handleReset = () => {
+    setBoard(createBoard())
+    setHasWon(false)
+  }
   
   return ( 
       <div>
         {hasWon ? (
           <div className={style.winner}>
-            <span className={style.neonOrange}>YOU</span>
-            <span className={style.neonBlue}>WIN!</span>
+            <div className={style.winnerText}>
+              <span className={style.neonOrange}>YOU</span>
+              <span className={style.neonBlue}>WIN!</span>
+            </div>
+            <button  className={style.resetBtn} onClick={handleReset}>Reset</button>
           </div>
         ) : (
           <div>

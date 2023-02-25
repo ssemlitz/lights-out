@@ -3,7 +3,7 @@ body {
 }
 
 .Board {
-  margin: 0 auto;
+  margin: 100px auto;
   border-radius: 10px;
   /* box-shadow: 10px 10px 0 red; */
   box-shadow: 0 0 50px #fff, -10px 0 80px #f0f, 10px 0 80px #0ff;
@@ -44,6 +44,10 @@ table tr:last-child td:last-child {
 }
 
 .neonOrange {
+  width: auto;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
   font-family: neon;
   color: #fb4264;
   font-size: 80px;
@@ -54,6 +58,10 @@ table tr:last-child td:last-child {
 }
 
 .neonBlue {
+  width: auto;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
   font-family: neon;
   color: #426dfb;
   font-size: 80px;
@@ -64,9 +72,39 @@ table tr:last-child td:last-child {
   -o-animation: neon-blue 2s linear infinite;
 }
 
+.winner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .winner .neonBlue,
 .winner .neonOrange {
   font-size: 200px;
+}
+
+.winnerText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.resetBtn {
+  border-radius: 5px;
+  background-color: black;
+  width: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: neon;
+  color: #426dfb;
+  font-size: 80px;
+  text-shadow: 0 0 3vw #2356ff;
+  animation: neon-yellow 2s linear infinite;
+  -moz-animation: neon-yellow 2s linear infinite;
+  -webkit-animation: neon-yellow 2s linear infinite;
+  -o-animation: neon-yellow 2s linear infinite;
 }
 
 @keyframes neon-orange {
@@ -94,5 +132,19 @@ table tr:last-child td:last-child {
     text-shadow: 0 0 0.5vw #082180, 0 0 1.5vw #082180, 0 0 5vw #082180,
       0 0 5vw #082180, 0 0 0.2vw #082180, 0.5vw 0.5vw 0.1vw #0a3940;
     color: #146c80;
+  }
+}
+
+@keyframes neon-yellow {
+  0%,
+  100% {
+    text-shadow: 0 0 1vw #f9d71c, 0 0 3vw #f9d71c, 0 0 10vw #f9d71c,
+      0 0 10vw #f9d71c, 0 0 0.4vw #fff9c9, 0.5vw 0.5vw 0.1vw #806814;
+    color: #f9d71c;
+  }
+  50% {
+    text-shadow: 0 0 0.5vw #bfa90a, 0 0 1.5vw #bfa90a, 0 0 5vw #bfa90a,
+      0 0 5vw #bfa90a, 0 0 0.2vw #fff9c9, 0.5vw 0.5vw 0.1vw #40390a;
+    color: #bfa90a;
   }
 }
