@@ -8,4 +8,7 @@
 
 .CellLit {
   background-color: #00bcd4;
+  height: 100px;
+  width: 100px;
+  border-radius: 1px;
 }
